@@ -2,11 +2,11 @@ const express = require('express');
 
 const app = express() //Calling express as a function sets up server
 const userRouter = require('./routes/users');
-const wordRouter = require('./routes/words');
+const wordRouter = require('./routes/word');
 app.set('view engine', 'ejs'); //Set the view engine to ejs
 app.use(express.static('public')); 
 app.use('/users, userRouter')
-app.use('/words, wordRouter')
+app.use('/word, wordRouter')
 app.get('/',
     (req, res)=>{
 
