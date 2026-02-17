@@ -1,6 +1,8 @@
 const express = require('express');
 
 const router = express.Router();
+const fs = require('fs').promises;
+
 
   
 
@@ -11,6 +13,6 @@ res.send('Word Home Page');
 });
 router.get('/wotd', (req, res)=>{
 
-res.send('Word of the Day Page');
+res.render('wotd');
 });
  module.exports = router;
