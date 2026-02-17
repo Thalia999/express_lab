@@ -5,8 +5,8 @@ const userRouter = require('./routes/users');
 const wordRouter = require('./routes/word');
 app.set('view engine', 'ejs'); //Set the view engine to ejs
 app.use(express.static('public')); 
-app.use('/users, userRouter')
-app.use('/word, wordRouter')
+app.use('/users', userRouter)
+app.use('/word', wordRouter)
 app.get('/',
     (req, res)=>{
 
@@ -21,3 +21,4 @@ app.get('/users/new', (req, res)=>{
 });
 
 app.listen(3030); //Tell our app to listen for requests
+
