@@ -18,6 +18,9 @@ res.render('wotd', {word:word, part:part, definition:definition});
 // do something w/ func
 });
  module.exports = router;
+ router.get('/addword', (req, res)=>{
+
+ });
 
  let getWordFromDictionary = async () => {
     try{
