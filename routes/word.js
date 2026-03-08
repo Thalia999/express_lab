@@ -25,19 +25,15 @@ res.render('wotd', {word:word, part:part, definition:definition});
     try {
         const data = await readFile('resources/allwords.txt', 'utf8');
 
-        // Split into lines
-        let lines = data.split('\n');
+        let lines = data.split('\n').filter(line => line.trim() !== ''); // Remove empty lines
 
-        // Map each line to an object
         let words = lines.map(line => {
             let [word, part, definition] = line.split('\t');
             return { word, part, definition };
         });
 
-        // Sort alphabetically
         words.sort((a, b) => a.word.localeCompare(b.word));
 
-        // Render only once
         res.render('allwords', { words: words });
 
     } catch (err) {
