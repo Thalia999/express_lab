@@ -17,10 +17,23 @@ router.get('/wotd', async (req, res)=>{
 res.render('wotd', {word:word, part:part, definition:definition});
 // do something w/ func
 });
- module.exports = router;
+
  router.get('/addword', (req, res)=>{
 
  });
+ router.get('/allwords', async (req, res)=>{
+    try{
+        const data = await readFile('resources/allwords.txt','utf8');
+        let wordArray = data.split('\n');
+        res.render('allwords', {wordArray: wordArray});
+        words.sort((a,b)=> a.word.localeCompare(b.word));
+
+        res.render('allwords', {words: words});
+    } catch(err){
+        console.log("There was an error reading the file", err);
+    }
+ });
+
 
  let getWordFromDictionary = async () => {
     try{
@@ -36,4 +49,5 @@ res.render('wotd', {word:word, part:part, definition:definition});
         console.log("There was an error reading the file", err);
     
     }
-};
+};  
+module.exports = router;
