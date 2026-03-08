@@ -21,18 +21,30 @@ res.render('wotd', {word:word, part:part, definition:definition});
  router.get('/addword', (req, res)=>{
 
  });
- router.get('/allwords', async (req, res)=>{
-    try{
-        const data = await readFile('resources/allwords.txt','utf8');
-        let wordArray = data.split('\n');
-        res.render('allwords', {wordArray: wordArray});
-        words.sort((a,b)=> a.word.localeCompare(b.word));
+ router.get('/allwords', async (req, res) => {
+    try {
+        const data = await readFile('resources/allwords.txt', 'utf8');
 
-        res.render('allwords', {words: words});
-    } catch(err){
+        // Split into lines
+        let lines = data.split('\n');
+
+        // Map each line to an object
+        let words = lines.map(line => {
+            let [word, part, definition] = line.split('\t');
+            return { word, part, definition };
+        });
+
+        // Sort alphabetically
+        words.sort((a, b) => a.word.localeCompare(b.word));
+
+        // Render only once
+        res.render('allwords', { words: words });
+
+    } catch (err) {
         console.log("There was an error reading the file", err);
+        res.send("Error loading words");
     }
- });
+});
 
 
  let getWordFromDictionary = async () => {
